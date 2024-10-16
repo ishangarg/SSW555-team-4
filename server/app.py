@@ -26,18 +26,20 @@ def validate_conversations(data):
         err.append("'messages' must be a list")
     else:
         for i, message in enumerate(data["messages"]):
+            if not isinstance(message, dict):
+                err.append(f"messages[{i}] is not of type 'object'")
             if "timestamp" not in message:
-                err.append(f"'timestamp' must be present in 'messages[{i}]'")
+                err.append(f"'timestamp' must be present in messages[{i}]")
             elif not isinstance(message.get("timestamp"), str):
                 err.append(f"messages[{i}].timestamp must be a string")
             elif not validate_timestamp(message.get("timestamp")):
                 err.append(f"messages[{i}].timestamp is not valid")
             if "query" not in message:
-                err.append(f"'query' must be present in 'messages[{i}]'")
+                err.append(f"'query' must be present in messages[{i}]")
             elif not isinstance(message.get("query"), str):
                 err.append(f"messages[{i}].query must be a string")
             if "response" not in message:
-                err.append(f"'response' must be present in 'messages[{i}]'")
+                err.append(f"'response' must be present in messages[{i}]")
             elif not isinstance(message.get("response"), str):
                 err.append(f"messages[{i}].response must be a string")
     return err
