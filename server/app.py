@@ -61,13 +61,17 @@ def add_data():
         print("Validation failed with the following errors:")
         final_error_message = ""
         for err in val_err:
-            final_error_message = final_error_message + err + "\n" 
+            final_error_message = final_error_message + err + "\n"
         return jsonify({"message": final_error_message}), 400
-    data = collection.find_one({"user_id": data.get("user_id")}, {"_id": 0})
-    if data:
-        return jsonify({"message": f"Data for the user id: {data.get("user_id")} already exists, kindly submit an update request"}), 400
-        # return update_data()
-    collection.insert_one(data)
+    
+    # Check if the user_id already exists
+    existing_data = collection.find_one({"user_id": data.get("user_id")}, {"_id": 0})
+    if existing_data:
+        return jsonify({"message": f"Data for the user id: {existing_data.get('user_id')} already exists, kindly submit an update request"}), 400
+    
+    # Insert the new data into the collection
+    collection.insert_one(data)  # Use the request data instead of the existing data
+    
     return jsonify({"message": "Data inserted!"}), 200
 
 @app.route('/update', methods=['PUT'])
