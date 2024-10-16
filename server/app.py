@@ -88,7 +88,7 @@ def update_data():
         return jsonify({"message": final_error_message}), 400
     old_data = collection.find_one({"user_id": data.get("user_id")})
     if not old_data:
-        msg = f"No conversations found for the user with id: {data.user_id}"
+        msg = f"No conversations found for the user with id: {data.get("user_id")}"
         return jsonify({"message": msg}), 400
     all_messages = old_data.get("messages", []) + data.get("messages", [])
     print(all_messages)
