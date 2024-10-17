@@ -35,3 +35,31 @@ npx expo start
 ```
 
 ## Backend Installation
+
+The backend server is located in /server and is served by Python and MongoDB. Please install MongoDB on your machine.
+
+After MongoDB is installed,
+
+```bash
+cd server
+```
+
+Running on virtual environment is strongly recommended.
+
+```bash
+pip install -r requirements.txt
+```
+
+This will install all the necessary libraries.
+
+```bash
+python app.py
+```
+
+This will start the development server.
+
+## Backend Testing
+
+```bash
+python test.py
+```
