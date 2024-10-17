@@ -15,10 +15,10 @@ git init
 git clone https://github.com/ishangarg/SSW555-team-4
 ```
 
-Once the repository is downloaded, branch into the directory:
+Once the repository is downloaded, a new directory called SSW555-team-4 should appear in the directory you just created/entered. This is the directory containing the repository code. Enter into the downloaded directory:
 
 ```bash
-cd <name of your directory>
+cd SSW555-team-4
 ```
 ## Frontend Installation
 
@@ -29,7 +29,7 @@ npm i
 ```
 This will download the necessary libraries used by the React Native Expo App.
 
-To run the frontend, run the following commands and follow the command line prompts:
+To run the frontend, run the following commands and follow the command line prompts to set up and iOS or Android simulator:
 ```bash
 npx expo start
 ```
