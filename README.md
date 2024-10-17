@@ -10,12 +10,28 @@ In addition, another large factor of our application is gamification strategies 
 
 To clone this repository, run the following command in your terminal. It is recommended to naviagte to the directory you would like to clone the repository to before enter the command to prevent the repository from being copied to the wrong directory:
 
-\`\`\`
+```bash
 git init
 git clone https://github.com/ishangarg/SSW555-team-4
-\`\`\`
+```
 
+Once the repository is downloaded, branch into the directory:
 
+```bash
+cd <name of your directory>
+```
 ## Frontend Installation
+
+Now that the repository is downloaded, in the root of the directory, run the following command to download the necessary libraries: 
+
+```bash
+npm i
+```
+This will download the necessary libraries used by the React Native Expo App.
+
+To run the frontend, run the following commands and follow the command line prompts:
+```bash
+npx expo start
+```
 
 ## Backend Installation
