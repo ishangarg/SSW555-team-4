@@ -26,7 +26,7 @@ class FlaskTestCase(unittest.TestCase):
 
     def test_add_entry(self):
         data = {
-            "user_id": "test_user_2",
+            "user_id": "test_user_5",
             "messages": [
                 {
                     "timestamp": "2024-10-15 12:00:00",
