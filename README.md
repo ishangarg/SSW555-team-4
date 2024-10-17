@@ -6,6 +6,16 @@ The chat bot would ask certain questions throughout the day to gather input from
 
 In addition, another large factor of our application is gamification strategies to keep the user engaged and using the app. As one concern with this app would be creating something that elderly and tech adverse users would be interested and excited about using, coming back to, and providing honest information.
 
+## Installation
+
+To clone this repository, run the following command in your terminal. It is recommended to naviagte to the directory you would like to clone the repository to before enter the command to prevent the repository from being copied to the wrong directory:
+
+\`\`\`
+git init
+git clone https://github.com/ishangarg/SSW555-team-4
+\`\`\`
+
+
 ## Frontend Installation
 
 ## Backend Installation
