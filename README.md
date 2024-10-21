@@ -22,14 +22,20 @@ cd SSW555-team-4
 ```
 ## Frontend Installation
 
-Now that the repository is downloaded, in the root of the directory, run the following command to download the necessary libraries: 
+Now that the repository is downloaded, enter into the frontend directory:
+
+```bash
+cd frontend
+```
+
+Once here, run the following command to download the necessary libraries: 
 
 ```bash
 npm i
 ```
 This will download the necessary libraries used by the React Native Expo App.
 
-To run the frontend, run the following commands and follow the command line prompts to set up and iOS or Android simulator:
+To run the frontend, run the following command and follow the command line prompts to set up and iOS or Android simulator:
 ```bash
 npx expo start
 ```
