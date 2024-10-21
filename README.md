@@ -28,7 +28,7 @@ Now that the repository is downloaded, enter into the frontend directory:
 cd frontend
 ```
 
-Once here, run the following command to download the necessary libraries: 
+Our frontend service has been built using the React Native, Expo, and Typescript libraries. As a result, we must download these libraries to run the front end. Run the following command to download the necessary libraries: 
 
 ```bash
 npm i
