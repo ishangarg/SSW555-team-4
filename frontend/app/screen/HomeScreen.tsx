@@ -27,13 +27,6 @@ const HomeScreen = () => {
 
   return (
     <Screen style={styles.screen}>
-      <MaterialIcons
-        name={"settings"}
-        size={60}
-        color={defaultStyles.colors.accent}
-        style={styles.settings}
-        onPress={() => console.log("Pressed Settings")}
-      />
       <Text style={styles.recordingText}>
         {recording ? "Stop Recording" : "Start Recording"}
       </Text>
