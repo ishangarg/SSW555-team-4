@@ -49,7 +49,7 @@ const HomeScreen = () => {
     // }
 
     console.log("Audio processing complete");
-    setText("This is what the text will look like");
+    setText("This is what the speech to text will look like.");
   };
 
   return (
@@ -89,7 +89,11 @@ const HomeScreen = () => {
           />
         </View>
       )}
-      <Text>{text}</Text>
+      <Text
+      // Need to truncate the text so that it does not look too crazy
+      >
+        {text}
+      </Text>
       <Navigation />
     </Screen>
   );
