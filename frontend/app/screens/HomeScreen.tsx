@@ -98,7 +98,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   buttonContainer: {
     position: "absolute",
-    top: 100,
+    top: 100, // Sets the location of the central button
   },
 
   recordingText: {
