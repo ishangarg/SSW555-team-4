@@ -60,7 +60,9 @@ export const useAudioRecorder = (recordingOptions: Audio.RecordingOptions) => {
   };
 
   // Upload recording to a backend service
-  const uploadRecording = async (endpoint: string) => {
+  const uploadRecording = async (
+    endpoint: string
+  ): Promise<string | undefined> => {
     if (!recordingUri) return;
 
     const formData = new FormData();
@@ -68,7 +70,7 @@ export const useAudioRecorder = (recordingOptions: Audio.RecordingOptions) => {
       uri: recordingUri,
       name: "recording.m4a", // Change this as needed
       type: "audio/m4a", // Ensure this matches what the server expects
-    } as any); // Type assertion
+    } as any);
 
     try {
       const response = await fetch(endpoint, {
@@ -81,12 +83,14 @@ export const useAudioRecorder = (recordingOptions: Audio.RecordingOptions) => {
 
       if (response.ok) {
         console.log("Upload successful!");
+        return await response.text(); // This will get the text response from the endpoint
       } else {
-        console.error("Upload failed:", await response.text());
+        console.error("Upload failed:", await response.text()); // This will get the response's error message if the endpoint encounters a problem
       }
     } catch (error) {
-      console.error("Error uploading recording:", error);
+      console.error("Error uploading recording:", error); // This will display the error if there is a problem connecting with the endpoint
     }
+    return undefined;
   };
 
   // Cleanup sound when component unmounts

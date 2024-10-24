@@ -21,16 +21,16 @@ const CentralButton = ({ onPress }: Props) => {
 
 const styles = StyleSheet.create({
   bigButton: {
-    width: 225,
-    height: 225,
+    width: 175,
+    height: 175,
     backgroundColor: defaultStyles.colors.secondary,
     borderRadius: 150,
     borderColor: defaultStyles.colors.primary,
     borderWidth: 20,
   },
   smallButton: {
-    width: 100,
-    height: 100,
+    width: 85,
+    height: 85,
     backgroundColor: defaultStyles.colors.accent,
     borderRadius: 50,
     position: "absolute",

@@ -28,6 +28,14 @@ const Navigation = () => {
 };
 
 const styles = StyleSheet.create({
+  bigButton: {
+    width: 60,
+    height: 60,
+    backgroundColor: defaultStyles.colors.white,
+    borderRadius: 150,
+    borderColor: defaultStyles.colors.primary,
+    borderWidth: 10,
+  },
   container: {
     width: "100%",
     height: 70,
@@ -40,18 +48,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  bigButton: {
-    width: 60,
-    height: 60,
-    backgroundColor: defaultStyles.colors.secondary,
-    borderRadius: 150,
-    borderColor: defaultStyles.colors.primary,
-    borderWidth: 10,
-  },
   smallButton: {
     width: 20,
     height: 20,
     backgroundColor: defaultStyles.colors.accent,
+    borderColor: defaultStyles.colors.white,
+    borderWidth: 1,
     borderRadius: 50,
     position: "absolute",
     right: 10,
