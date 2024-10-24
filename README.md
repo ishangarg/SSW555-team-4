@@ -8,7 +8,7 @@ In addition, another large factor of our application is gamification strategies 
 
 ## Installation
 
-To clone this repository, run the following command in your terminal. It is recommended to naviagte to the directory you would like to clone the repository to before enter the command to prevent the repository from being copied to the wrong directory:
+To clone this repository, run the following command in your terminal. It is recommended to navigate to the directory you would like to clone the repository to before entering the command to prevent the repository from being copied to the wrong directory:
 
 ```bash
 git init
@@ -28,14 +28,14 @@ Now that the repository is downloaded, enter into the frontend directory:
 cd frontend
 ```
 
-Our frontend service has been built using the React Native, Expo, and Typescript libraries. As a result, we must download these libraries to run the front end. Run the following command to download the necessary libraries: 
+Our frontend service has been built using the React Native, Expo, and Typescript libraries. As a result, we must download these libraries to run the frontend. Run the following command to download the necessary libraries: 
 
 ```bash
 npm i
 ```
 This will download the necessary libraries used by the React Native Expo App.
 
-To run the frontend, run the following command and follow the command line prompts to set up and iOS or Android simulator:
+To run the frontend, run the following command and follow the command line prompts to set up an iOS or Android simulator (if a simulator is not download you may need to install it on your machine):
 ```bash
 npx expo start
 ```
