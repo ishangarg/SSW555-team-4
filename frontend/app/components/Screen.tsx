@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ViewStyle, StyleSheet } from "react-native";
+import { SafeAreaView, ViewStyle, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 import defaultStyles from "../config/styles";
 
@@ -9,7 +9,11 @@ interface Props {
 }
 
 const Screen = ({ children, style }: Props) => {
-  return <SafeAreaView style={[styles.screen, style]}>{children}</SafeAreaView>;
+  return (
+    <SafeAreaView style={[styles.screen, style]}>
+      <View style={[style, { flex: 1 }]}>{children}</View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
