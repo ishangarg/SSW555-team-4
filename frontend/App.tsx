@@ -5,7 +5,7 @@ import AddContactScreen from "./app/screens/AddContactScreen";
 export default function App() {
   return (
     <GestureHandlerRootView>
-      <AddContactScreen />
+      <HomeScreen />
     </GestureHandlerRootView>
   );
 }

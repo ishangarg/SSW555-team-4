@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Audio } from "expo-av";
+import axios from "axios";
 
 export const useAudioRecorder = (recordingOptions: Audio.RecordingOptions) => {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
@@ -68,27 +69,25 @@ export const useAudioRecorder = (recordingOptions: Audio.RecordingOptions) => {
     const formData = new FormData();
     formData.append("audio", {
       uri: recordingUri,
-      name: "recording.m4a", // Change this as needed
-      type: "audio/m4a", // Ensure this matches what the server expects
+      name: "recording.m4a",
+      type: "audio/m4a",
     } as any);
 
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
+      const response = await axios.post(endpoint, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // Important for file uploads
+          "Content-Type": "multipart/form-data",
         },
       });
 
-      if (response.ok) {
-        console.log("Upload successful!");
-        return await response.text(); // This will get the text response from the endpoint
-      } else {
-        console.error("Upload failed:", await response.text()); // This will get the response's error message if the endpoint encounters a problem
-      }
+      console.log("Upload successful!");
+      return response.data.transcription;
     } catch (error) {
-      console.error("Error uploading recording:", error); // This will display the error if there is a problem connecting with the endpoint
+      if (axios.isAxiosError(error)) {
+        console.error("Upload failed:", error.response?.data);
+      } else {
+        console.error("Error uploading recording:", error);
+      }
     }
     return undefined;
   };
