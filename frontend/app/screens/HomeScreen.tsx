@@ -22,34 +22,29 @@ const HomeScreen = () => {
   const [text, setText] = useState<string | undefined>();
 
   const handleUpload = async () => {
-    // This method will submit the voice recording to the backend to convert the audio to text
-    // Should receive the text as a response
+    const endpoint = "https://your-backend-service.com/upload"; // Replace with your backend URL
 
-    // Below will be integrated when the Endpoint is complete
+    try {
+      const textFromSpeech = await uploadRecording(endpoint);
 
-    // const endpoint = "https://your-backend-service.com/upload"; // Replace with your backend URL
-
-    // try {
-    //   const textFromSpeech = await uploadRecording(endpoint);
-
-    //   if (textFromSpeech) {
-    //     setText(textFromSpeech);
-    //     console.log("Text received from speech:", textFromSpeech);
-    //   } else {
-    //     console.log("No text received from the server.");
-    //     setText("No text could be extracted from the audio.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error during speech processing:", error);
-    //   setText(
-    //     `Error processing speech: ${
-    //       error instanceof Error ? error.message : String(error)
-    //     }`
-    //   );
-    // }
+      if (textFromSpeech) {
+        setText(textFromSpeech);
+        console.log("Text received from speech:", textFromSpeech);
+      } else {
+        console.log("No text received from the server.");
+        setText("No text could be extracted from the audio.");
+      }
+    } catch (error) {
+      console.error("Error during speech processing:", error);
+      setText(
+        `Error processing speech: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
+    }
 
     console.log("Audio processing complete");
-    setText("This is what the speech to text will look like.");
+    // setText("This is what the speech to text will look like.");
   };
 
   return (

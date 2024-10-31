@@ -3,6 +3,7 @@
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
+import requests
 
 def convert_audio_to_wav(input_file):
     file_ext = os.path.splitext(input_file)[1].lower()
@@ -23,6 +24,15 @@ def transcribe_audio(input_file):
         return "Could not understand the audio."
     except sr.RequestError as e:
         return f"Could not request results; {e}"
+
+def send_transcription_to_api(transcription):
+    url = "http://localhost:5000/data"
+    params = {"transcription": transcription}
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        print("Transcription sent successfully!")
+    else:
+        print(f"Failed to send transcription. Status code: {response.status_code}")
 
 def main():
     input_file = 'your_audio_file.mp3'  # Replace with your file path

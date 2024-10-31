@@ -19,6 +19,8 @@ const AddContactScreen = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    const postingData = { userID: "", data };
+
     try {
       console.log("test",data);
       let postObj = {
