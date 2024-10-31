@@ -72,7 +72,7 @@ def validate_contact(data):
                 parsed_number = phonenumbers.parse(contact.get("phone_number"), "US")
                 print(parsed_number)
                 if phonenumbers.is_valid_number(parsed_number) == False:
-                    err.append(f"The 'phone_number': {contact.get("phone_number")} is invalid")
+                    err.append(f"The 'phone_number': {contact.get('phone_number')} is invalid")
                 else:
                     contact["phone_number"] = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
                     contact["contact_name"] = contact["contact_name"].strip()
