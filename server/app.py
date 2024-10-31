@@ -4,8 +4,16 @@ from datetime import datetime
 from validation.validation import validate_conversations, validate_timestamp, validate_contact
 from bson import ObjectId
 import phonenumbers
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {
+    "origins": "*",
+    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"]
+}})
 
 # connecting to mongoDB
 client = MongoClient("mongodb://localhost:27017/")
@@ -19,7 +27,7 @@ ec_collection = db.contacts
 def home():
     return "Welcome!"
 
-@app.route('/add', methods=['POST'])
+@app.route('/add', methods=['POST', 'OPTIONS'])
 def add_data():
     data = request.json
     val_err = validate_conversations(data)
@@ -30,11 +38,14 @@ def add_data():
             final_error_message = final_error_message + err + "\n"
         return jsonify({"message": final_error_message}), 400
     
+    for i, message in enumerate(data['messages']):
+        message['_id'] = ObjectId()
+        message['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # Check if the user_id already exists
     existing_data = collection.find_one({"user_id": data.get("user_id")}, {"_id": 0})
     if existing_data:
         for message in data['messages']:
-            message['_id'] = ObjectId()
+            # message['_id'] = ObjectId()
         
             collection.update_one(
                 {"user_id": data.get("user_id")},
@@ -42,9 +53,7 @@ def add_data():
             )
         return jsonify({"message": "Messages appended to existing user data"}), 200
     
-    for i, message in enumerate(data['messages']):
-        message['_id'] = ObjectId()
-        message['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
     collection.insert_one(data)
     return jsonify({"message": "Data inserted!"}), 200
 
@@ -76,7 +85,7 @@ def update_data():
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    data = list(collection.find({}, {"_id": 0}))
+    data = list(collection.find({}, {"_id": 0, 'messages._id': 0}))
     return jsonify(data), 200
 
 @app.route('/dataById', methods=['GET'])

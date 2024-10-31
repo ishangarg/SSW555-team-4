@@ -20,11 +20,18 @@ const AddContactScreen = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      console.log(data);
-      const response = await axios.post("https://localhost:5000/add", data);
+      console.log("test",data);
+      let postObj = {
+        user_id: "testerEmail1@gmail.com",
+        contacts: [{
+          contact_name: data.name,
+          phone_number: data.number
+        }]
+      }
+      const response = await axios.post('http://10.0.2.2:5000/emergencyContacts', postObj);
       console.log(response.data);
     } catch (error) {
-      console.error("Error Posting data:", error);
+      console.error(error);
     }
   };
 
