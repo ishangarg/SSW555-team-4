@@ -19,9 +19,14 @@ const AddContactScreen = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    const postingData = { userID: "", data };
+
     try {
       console.log(data);
-      const response = await axios.post("https://localhost:5000/add", data);
+      const response = await axios.post(
+        "https://localhost:5000/add",
+        postingData
+      );
       console.log(response.data);
     } catch (error) {
       console.error("Error Posting data:", error);
