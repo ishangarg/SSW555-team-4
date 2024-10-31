@@ -5,7 +5,9 @@ from validation.validation import validate_conversations, validate_timestamp, va
 from bson import ObjectId
 import phonenumbers
 from flask_cors import CORS
-
+import speech_recognition as sr
+from pydub import AudioSegment
+import os
 
 app = Flask(__name__)
 
@@ -22,7 +24,27 @@ client = MongoClient("mongodb://localhost:27017/")
 db = client.sprinters
 collection = db.conversations
 ec_collection = db.contacts
-    
+
+def convert_audio_to_wav(input_file):
+    file_ext = os.path.splitext(input_file)[1].lower()
+    if file_ext != '.wav':
+        sound = AudioSegment.from_file(input_file)
+        input_file = os.path.splitext(input_file)[0] + '.wav'
+        sound.export(input_file, format='wav')
+    return input_file
+
+def transcribe_audio(input_file):
+    r = sr.Recognizer()
+    with sr.AudioFile(input_file) as source:
+        audio = r.record(source)
+    try:
+        text = r.recognize_google(audio)
+        return text
+    except sr.UnknownValueError:
+        return "Could not understand the audio."
+    except sr.RequestError as e:
+        return f"Could not request results; {e}"
+
 @app.route('/')
 def home():
     return "Welcome!"
@@ -132,6 +154,28 @@ def get_emergency_contacts():
         return jsonify({"message": f"Data with the user id: {user_id} not found"}), 404
     print(data)
     return data, 200
+
+@app.route('/transcribe_audio', methods=['POST'])
+def transcribe_audio_route():
+    if 'audio' not in request.files:
+        return jsonify({"message": "No audio file provided"}), 400
+    
+    audio_file = request.files['audio']
+    input_path = os.path.join("/tmp", audio_file.filename)
+    audio_file.save(input_path)
+    
+    # Convert audio to wav if necessary
+    wav_file = convert_audio_to_wav(input_path)
+    
+    # Transcribe the audio
+    transcription = transcribe_audio(wav_file)
+    
+    # Clean up the temporary file
+    os.remove(input_path)
+    if wav_file != input_path:
+        os.remove(wav_file)
+    
+    return jsonify({"transcription": transcription}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
