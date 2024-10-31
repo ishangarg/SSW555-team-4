@@ -4,6 +4,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 import speech2text
 import os
+import requests
 from pydub import AudioSegment
 import speech_recognition as sr
 
@@ -68,6 +69,30 @@ class TestSpeech2Text(unittest.TestCase):
         transcription = speech2text.transcribe_audio('test_audio.wav')
 
         self.assertIn("Could not request results; API unavailable", transcription)
+
+    @patch('speech2text.requests.get')
+    def test_send_transcription_to_api_success(self, mock_get):
+        # Simulate a successful API response
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_get.return_value = mock_response
+
+        # Capture print output
+        with patch('builtins.print') as mock_print:
+            speech2text.send_transcription_to_api("Hello World")
+            mock_print.assert_called_once_with("Transcription sent successfully!")
+
+    @patch('speech2text.requests.get')
+    def test_send_transcription_to_api_failure(self, mock_get):
+        # Simulate a failed API response
+        mock_response = MagicMock()
+        mock_response.status_code = 500
+        mock_get.return_value = mock_response
+
+        # Capture print output
+        with patch('builtins.print') as mock_print:
+            speech2text.send_transcription_to_api("Hello World")
+            mock_print.assert_called_once_with("Failed to send transcription. Status code: 500")
 
 if __name__ == '__main__':
     unittest.main()
