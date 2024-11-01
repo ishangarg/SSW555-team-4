@@ -22,7 +22,7 @@ const HomeScreen = () => {
   const [text, setText] = useState<string | undefined>();
 
   const handleUpload = async () => {
-    const endpoint = "https://your-backend-service.com/upload"; // Replace with your backend URL
+    const endpoint = "/transcribe_audio"; // Replace with your backend URL
 
     try {
       const textFromSpeech = await uploadRecording(endpoint);
