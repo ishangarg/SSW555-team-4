@@ -4,14 +4,13 @@ import unittest
 from unittest.mock import patch, MagicMock
 import speech2text
 import os
-import requests
 from pydub import AudioSegment
 import speech_recognition as sr
 
 class TestSpeech2Text(unittest.TestCase):
 
     @patch('speech2text.AudioSegment')
-    def test_convert_audio_to_wav_mp3(self, mock_audio_segment):
+    def test_audio_file_to_wav_mp3(self, mock_audio_segment):
         # Mock the input and output
         input_file = 'test_audio.mp3'
         expected_output = 'test_audio.wav'
@@ -20,16 +19,24 @@ class TestSpeech2Text(unittest.TestCase):
         mock_sound = MagicMock()
         mock_audio_segment.from_file.return_value = mock_sound
 
-        output_file = speech2text.convert_audio_to_wav(input_file)
+        output_file = speech2text.audio_file_to_wav(input_file)
 
         mock_audio_segment.from_file.assert_called_with(input_file)
         mock_sound.export.assert_called_with(expected_output, format='wav')
         self.assertEqual(output_file, expected_output)
 
-    def test_convert_audio_to_wav_wav(self):
-        # No conversion should happen if the file is already a WAV
+    @patch('os.path.splitext')
+    def test_audio_file_to_wav_wav(self, mock_splitext):
+        # Mock os.path.splitext to control the file extension
+        mock_splitext.return_value = ('test_audio', '.wav')
         input_file = 'test_audio.wav'
-        output_file = speech2text.convert_audio_to_wav(input_file)
+
+        output_file = speech2text.audio_file_to_wav(input_file)
+
+        # Ensure that AudioSegment.from_file is not called for a .wav file
+        with patch('speech2text.AudioSegment.from_file') as mock_from_file:
+            mock_from_file.assert_not_called()
+
         self.assertEqual(output_file, input_file)
 
     @patch('speech2text.sr.AudioFile')
@@ -80,7 +87,7 @@ class TestSpeech2Text(unittest.TestCase):
         # Capture print output
         with patch('builtins.print') as mock_print:
             speech2text.send_transcription_to_api("Hello World")
-            mock_print.assert_called_once_with("Transcription sent successfully!")
+            mock_print.assert_called_with("Transcription sent successfully!")
 
     @patch('speech2text.requests.get')
     def test_send_transcription_to_api_failure(self, mock_get):
@@ -92,7 +99,7 @@ class TestSpeech2Text(unittest.TestCase):
         # Capture print output
         with patch('builtins.print') as mock_print:
             speech2text.send_transcription_to_api("Hello World")
-            mock_print.assert_called_once_with("Failed to send transcription. Status code: 500")
+            mock_print.assert_called_with("Failed to send transcription. Status code: 500")
 
 if __name__ == '__main__':
     unittest.main()

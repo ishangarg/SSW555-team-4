@@ -1,16 +1,18 @@
 # speech2text.py
 
+import sys
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
 import requests
 
-def convert_audio_to_wav(input_file):
+def audio_file_to_wav(input_file):
     file_ext = os.path.splitext(input_file)[1].lower()
     if file_ext != '.wav':
         sound = AudioSegment.from_file(input_file)
-        input_file = os.path.splitext(input_file)[0] + '.wav'
-        sound.export(input_file, format='wav')
+        output_file = os.path.splitext(input_file)[0] + '.wav'
+        sound.export(output_file, format='wav')
+        return output_file
     return input_file
 
 def transcribe_audio(input_file):
@@ -35,11 +37,16 @@ def send_transcription_to_api(transcription):
         print(f"Failed to send transcription. Status code: {response.status_code}")
 
 def main():
-    input_file = 'your_audio_file.mp3'  # Replace with your file path
-    wav_file = convert_audio_to_wav(input_file)
+    if len(sys.argv) < 2:
+        print("Usage: python speech2text.py <audio_file>")
+        sys.exit(1)
+    input_file = sys.argv[1]
+    wav_file = audio_file_to_wav(input_file)
     transcription = transcribe_audio(wav_file)
     print("Transcription:")
     print(transcription)
+    # Uncomment the line below to send the transcription to the API, commented out as it does not currently have a database connection and will fail. 
+    # send_transcription_to_api(transcription) 
 
 if __name__ == '__main__':
     main()
