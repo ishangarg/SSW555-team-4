@@ -69,8 +69,8 @@ export const useAudioRecorder = (recordingOptions: Audio.RecordingOptions) => {
     const formData = new FormData();
     formData.append("audio", {
       uri: recordingUri,
-      name: "recording.m4a",
-      type: "audio/m4a",
+      name: "recording.mp4", // Was recording.m4a
+      type: "audio/mp4", // Was audio/m4a
     } as any);
 
     try {

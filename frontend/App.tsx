@@ -6,7 +6,7 @@ import ContactsScreen from "./app/screens/ContactsScreen";
 export default function App() {
   return (
     <GestureHandlerRootView>
-      <ContactsScreen />
+      <HomeScreen />
     </GestureHandlerRootView>
   );
 }
