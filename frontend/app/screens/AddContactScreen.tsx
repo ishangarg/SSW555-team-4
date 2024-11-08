@@ -8,6 +8,7 @@ import Screen from "../components/Screen";
 import AppFormField from "../components/AppFormField";
 import { addContactSchema, ContactFormData } from "../schemas/ContactSchema";
 import SubmitButton from "../components/AppSubmitButton";
+import { contacts } from "../tests/testingData";
 
 const AddContactScreen = () => {
   const methods = useForm<ContactFormData>({
@@ -19,20 +20,21 @@ const AddContactScreen = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    try {
-      console.log("test",data);
-      let postObj = {
-        user_id: "testerEmail1@gmail.com",
-        contacts: [{
-          contact_name: data.name,
-          phone_number: data.number
-        }]
-      }
-      const response = await axios.post('http://10.0.2.2:5000/emergencyContacts', postObj);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    contacts.push({ contact_name: data.name, phone_number: data.number });
+    // try {
+    //   console.log("test",data);
+    //   let postObj = {
+    //     user_id: "testerEmail1@gmail.com",
+    //     contacts: [{
+    //       contact_name: data.name,
+    //       phone_number: data.number
+    //     }]
+    //   }
+    //   const response = await axios.post('http://10.0.2.2:5000/emergencyContacts', postObj);
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (

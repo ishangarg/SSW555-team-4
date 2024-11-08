@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
   recordingText: {
     position: "absolute",
     top: "30%",
-    fontWeight: "600",
-    fontSize: 28,
+    fontSize: defaultStyles.text.fontSize,
+    fontWeight: defaultStyles.text.fontWeight,
   },
   screen: {
     justifyContent: "center",

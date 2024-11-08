@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   text: {
     color: defaultStyles.colors.black,
     flex: 1,
-    fontSize: 18,
-    fontWeight: "600",
+    fontSize: defaultStyles.subText.fontSize,
+    fontWeight: defaultStyles.subText.fontWeight,
   },
 });
 
