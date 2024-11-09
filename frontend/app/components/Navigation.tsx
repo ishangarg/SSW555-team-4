@@ -16,7 +16,6 @@ const Navigation = () => {
         name="apps"
         size={70}
         color={defaultStyles.colors.primary}
-        onPress={() => navigation.navigate("Contacts")}
       />
 
       <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
@@ -28,6 +27,7 @@ const Navigation = () => {
         name="settings"
         size={70}
         color={defaultStyles.colors.primary}
+        onPress={() => navigation.navigate("Settings")}
       />
     </View>
   );

@@ -16,10 +16,10 @@ const ContactsScreen = () => {
   };
 
   const handleAddContact = () => {
-    navigation.navigate("AddContact");
+    navigation.replace("AddContact");
   };
   return (
-    <Screen style={styles.container}>
+    <Screen style={styles.screen}>
       <View>
         <Text style={[styles.header, { textAlign: "center" }]}>
           Emergency Contacts
@@ -34,10 +34,10 @@ const ContactsScreen = () => {
         </TouchableWithoutFeedback>
       </View>
 
-      <View style={styles.contactContainer}>
+      <View style={styles.container}>
         <View>
           {contacts.map((contact, index) => (
-            <View key={index} style={styles.contactCard}>
+            <View key={index} style={styles.contact}>
               <Text style={[styles.text, { marginBottom: 10 }]}>
                 {contact.contact_name}
               </Text>
@@ -75,17 +75,17 @@ const styles = StyleSheet.create({
     borderRadius: "20%",
     marginBottom: 20,
   },
-  contactCard: {
+  contact: {
     backgroundColor: colors.off_white,
     padding: 20,
     borderRadius: "20%",
     marginBottom: 20,
   },
-  contactContainer: {
+  container: {
     flex: 1,
     justifyContent: "space-between",
   },
-  container: {
+  screen: {
     padding: 50,
     justifyContent: "space-between",
   },

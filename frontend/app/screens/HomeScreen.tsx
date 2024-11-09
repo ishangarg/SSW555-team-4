@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import CentralButton from "../components/CentralButton";
 import defaultStyles from "../config/styles";
-import Navigation from "../components/Navigation";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
 import { recordingOptions } from "../config/audioRecordingOptions";
 
