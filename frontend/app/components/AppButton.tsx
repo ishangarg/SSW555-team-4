@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, ViewStyle } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import defaultStyles from "../config/styles";
 
@@ -7,31 +7,38 @@ interface Props {
   onPress: () => any;
   title: string;
   color?: string;
+  style?: ViewStyle;
 }
 
-const AppButton = ({ onPress, title, color = "primary" }: Props) => {
+const AppButton = ({ onPress, title, color = "primary", style }: Props) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.button, { backgroundColor: defaultStyles.colors[color] }]} // Using the [] to find the color
+      style={[
+        styles.button,
+        { backgroundColor: defaultStyles.colors[color] },
+        style,
+      ]} // Using the [] to find the color
     >
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
+const { colors, text, subText } = defaultStyles;
+
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: defaultStyles.colors.primary,
-    borderRadius: 25,
+    backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    padding: 15,
+    padding: 20,
     width: "100%",
+    borderRadius: "20%",
   },
   text: {
-    color: defaultStyles.colors.white,
-    fontSize: 18,
+    color: colors.white,
+    fontSize: subText.fontSize,
     textTransform: "uppercase",
     fontWeight: "bold",
   },

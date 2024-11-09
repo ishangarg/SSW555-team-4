@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
@@ -16,13 +16,13 @@ const SettingsScreen = () => {
   return (
     <Screen style={styles.screen}>
       {pages.map(({ path, name }, index) => (
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           key={index}
           onPress={() => navigation.navigate(path)}
           style={styles.options}
         >
           <Text style={styles.text}>{name}</Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       ))}
     </Screen>
   );

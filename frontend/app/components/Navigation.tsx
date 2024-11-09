@@ -22,13 +22,13 @@ const Navigation = () => {
         <View testID="big-button" style={styles.bigButton} />
         <View testID="small-button" style={styles.smallButton} />
       </TouchableWithoutFeedback>
-
-      <MaterialIcons
-        name="settings"
-        size={70}
-        color={defaultStyles.colors.primary}
-        onPress={() => navigation.navigate("Settings")}
-      />
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Settings")}>
+        <MaterialIcons
+          name="settings"
+          size={70}
+          color={defaultStyles.colors.primary}
+        />
+      </TouchableWithoutFeedback>
     </View>
   );
 };

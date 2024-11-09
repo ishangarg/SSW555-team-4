@@ -58,7 +58,7 @@ const AddContactScreen = () => {
             keyboardType="phone-pad"
           />
         </View>
-        <View>
+        <View style={styles.btnContainer}>
           <SubmitButton title="Add Contact" onSubmit={onSubmit} />
         </View>
       </Screen>
@@ -67,6 +67,9 @@ const AddContactScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  btnContainer: {
+    marginBottom: 20,
+  },
   container: {
     padding: 50,
     justifyContent: "space-between",

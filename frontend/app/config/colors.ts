@@ -6,6 +6,7 @@ const colors: {
   white: string;
   light: string;
   off_white: string;
+  red: string;
   [key: string]: string;
 } = {
   primary: "#00C5FC",
@@ -15,6 +16,7 @@ const colors: {
   white: "#FFFEFB",
   light: "#E3E3E3",
   off_white: "#F0F0F0",
+  red: "#E3242B",
 };
 
 export default colors;

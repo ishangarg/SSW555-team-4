@@ -7,6 +7,7 @@ import Screen from "../components/Screen";
 import defaultStyles from "../config/styles";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProp } from "../config/navigation";
+import AppButton from "../components/AppButton";
 
 const ContactsScreen = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -24,14 +25,12 @@ const ContactsScreen = () => {
         <Text style={[styles.header, { textAlign: "center" }]}>
           Emergency Contacts
         </Text>
-        <TouchableWithoutFeedback
-          style={styles.emergency}
+        <AppButton
           onPress={handleEmergency}
-        >
-          <Text style={[styles.emergencyText, styles.text]}>
-            EMERGENCY SERVICES
-          </Text>
-        </TouchableWithoutFeedback>
+          title="Emergency Services"
+          color="red"
+          style={{ marginVertical: 50 }}
+        />
       </View>
 
       <View style={styles.container}>
@@ -47,19 +46,11 @@ const ContactsScreen = () => {
         </View>
 
         {contacts.length < 3 && (
-          <TouchableWithoutFeedback
-            style={styles.addButton}
+          <AppButton
             onPress={handleAddContact}
-          >
-            <Text
-              style={[
-                styles.text,
-                { textAlign: "center", color: colors.white },
-              ]}
-            >
-              ADD CONTACT
-            </Text>
-          </TouchableWithoutFeedback>
+            title="Add Contacts"
+            style={{ marginBottom: 20 }}
+          />
         )}
       </View>
     </Screen>
@@ -69,12 +60,6 @@ const ContactsScreen = () => {
 const { colors, text, subText } = defaultStyles;
 
 const styles = StyleSheet.create({
-  addButton: {
-    backgroundColor: colors.primary,
-    padding: 20,
-    borderRadius: "20%",
-    marginBottom: 20,
-  },
   contact: {
     backgroundColor: colors.off_white,
     padding: 20,
@@ -89,16 +74,7 @@ const styles = StyleSheet.create({
     padding: 50,
     justifyContent: "space-between",
   },
-  emergency: {
-    backgroundColor: "#E3242B",
-    padding: 20,
-    borderRadius: "20%",
-    marginVertical: 50,
-  },
-  emergencyText: {
-    color: colors.white,
-    textAlign: "center",
-  },
+
   header: {
     fontSize: text.fontSize,
     fontWeight: text.fontWeight,
