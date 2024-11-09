@@ -18,11 +18,19 @@ const Navigation = () => {
         color={defaultStyles.colors.primary}
       />
 
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
+      <TouchableWithoutFeedback
+        onPress={() =>
+          navigation.reset({ index: 0, routes: [{ name: "Home" }] })
+        }
+      >
         <View testID="big-button" style={styles.bigButton} />
         <View testID="small-button" style={styles.smallButton} />
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("Settings")}>
+      <TouchableWithoutFeedback
+        onPress={() =>
+          navigation.reset({ index: 0, routes: [{ name: "Settings" }] })
+        }
+      >
         <MaterialIcons
           name="settings"
           size={70}
