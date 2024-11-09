@@ -8,9 +8,13 @@ import Screen from "../components/Screen";
 import AppFormField from "../components/AppFormField";
 import { addContactSchema, ContactFormData } from "../schemas/ContactSchema";
 import SubmitButton from "../components/AppSubmitButton";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "../config/navigation";
 import { contacts } from "../tests/testingData";
 
 const AddContactScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   const methods = useForm<ContactFormData>({
     resolver: zodResolver(addContactSchema),
     defaultValues: {
@@ -35,6 +39,7 @@ const AddContactScreen = () => {
     // } catch (error) {
     //   console.error(error);
     // }
+    navigation.replace("Contacts");
   };
 
   return (

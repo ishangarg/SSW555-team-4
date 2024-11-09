@@ -1,22 +1,28 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import defaultStyles from "../config/styles";
+import { NavigationProp } from "../config/navigation";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const Navigation = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <View style={styles.container}>
       <MaterialCommunityIcons
         name="apps"
         size={70}
         color={defaultStyles.colors.primary}
+        onPress={() => navigation.navigate("Contacts")}
       />
 
-      <View>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
         <View testID="big-button" style={styles.bigButton} />
         <View testID="small-button" style={styles.smallButton} />
-      </View>
+      </TouchableWithoutFeedback>
 
       <MaterialIcons
         name="settings"

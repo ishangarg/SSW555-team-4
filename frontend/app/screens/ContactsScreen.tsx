@@ -5,14 +5,18 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { contacts } from "../tests/testingData";
 import Screen from "../components/Screen";
 import defaultStyles from "../config/styles";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "../config/navigation";
 
 const ContactsScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   const handleEmergency = () => {
     console.log("Emergency Clicked");
   };
 
   const handleAddContact = () => {
-    console.log("Add Contact Clicked");
+    navigation.navigate("AddContact");
   };
   return (
     <Screen style={styles.container}>
@@ -25,7 +29,7 @@ const ContactsScreen = () => {
           onPress={handleEmergency}
         >
           <Text style={[styles.emergencyText, styles.text]}>
-            Contact Emergency Services
+            EMERGENCY SERVICES
           </Text>
         </TouchableWithoutFeedback>
       </View>
@@ -53,7 +57,7 @@ const ContactsScreen = () => {
                 { textAlign: "center", color: colors.white },
               ]}
             >
-              Add a Contact
+              ADD CONTACT
             </Text>
           </TouchableWithoutFeedback>
         )}

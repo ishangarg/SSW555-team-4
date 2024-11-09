@@ -89,7 +89,6 @@ const HomeScreen = () => {
       >
         {text}
       </Text>
-      <Navigation />
     </Screen>
   );
 };
