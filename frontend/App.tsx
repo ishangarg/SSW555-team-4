@@ -10,6 +10,7 @@ import AddContactScreen from "./app/screens/AddContactScreen";
 import ContactsScreen from "./app/screens/ContactsScreen";
 import Navigation from "./app/components/Navigation";
 import SettingsScreen from "./app/screens/SettingsScreen";
+import TermsOfUseScreen from "./app/screens/TermsOfUseScreen";
 
 // Defines any parameters that these components need to render
 
@@ -29,6 +30,7 @@ export default function App() {
           <Stack.Screen name="AddContact" component={AddContactScreen} />
           <Stack.Screen name="Contacts" component={ContactsScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="TermsOfUse" component={TermsOfUseScreen} />
         </Stack.Navigator>
         <Navigation />
       </NavigationContainer>
