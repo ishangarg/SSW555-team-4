@@ -8,6 +8,7 @@ from flask_cors import CORS
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
+from chatgpt.ai import AI
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ CORS(app, resources={r"/*": {
 
 # connecting to mongoDB
 client = MongoClient("mongodb://localhost:27017/")
+ai = AI(key='')
 
 # database and collection names:
 db = client.sprinters
