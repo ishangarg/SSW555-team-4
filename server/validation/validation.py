@@ -2,6 +2,19 @@ import phonenumbers
 from phonenumbers import NumberParseException
 from datetime import datetime
 
+'''
+This is the original file with 2 user stories:
+
+1) Error handling for unknown input
+2) Emergency contact validation
+
+The code is difficult to read and has a lot of commented code.
+
+pylint validation.py
+Testing result Screenshot: test_before_refactor.png
+
+'''
+
 def validate_conversations(data):
     err = []
     if not isinstance(data, dict):
