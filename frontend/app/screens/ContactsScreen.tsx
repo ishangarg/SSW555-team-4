@@ -50,7 +50,13 @@ const ContactsScreen = () => {
                 <Text style={[styles.text, { marginBottom: 10 }]}>
                   {contact.contact_name}
                 </Text>
-                <Text style={styles.text}>{contact.phone_number}</Text>
+                <Text style={styles.text}>
+                  {contact.phone_number.slice(0, 3) +
+                    "-" +
+                    contact.phone_number.slice(3, 6) +
+                    "-" +
+                    contact.phone_number.slice(6)}
+                </Text>
               </View>
               <TouchableWithoutFeedback
                 style={styles.callContainer}
