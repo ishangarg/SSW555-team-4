@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import { contacts } from "../tests/testingData";
 import Screen from "../components/Screen";
@@ -19,6 +20,14 @@ const ContactsScreen = () => {
   const handleAddContact = () => {
     navigation.replace("AddContact");
   };
+
+  const handleCall = (contact: {
+    contact_name: string;
+    phone_number: string;
+  }): void => {
+    console.log(contact.contact_name, contact.phone_number);
+  };
+
   return (
     <Screen style={styles.screen}>
       <View>
@@ -37,10 +46,22 @@ const ContactsScreen = () => {
         <View>
           {contacts.map((contact, index) => (
             <View key={index} style={styles.contact}>
-              <Text style={[styles.text, { marginBottom: 10 }]}>
-                {contact.contact_name}
-              </Text>
-              <Text style={styles.text}>{contact.phone_number}</Text>
+              <View>
+                <Text style={[styles.text, { marginBottom: 10 }]}>
+                  {contact.contact_name}
+                </Text>
+                <Text style={styles.text}>{contact.phone_number}</Text>
+              </View>
+              <TouchableWithoutFeedback
+                style={styles.callContainer}
+                onPress={() => handleCall(contact)}
+              >
+                <MaterialCommunityIcons
+                  color={colors.primary}
+                  size={40}
+                  name="phone"
+                />
+              </TouchableWithoutFeedback>
             </View>
           ))}
         </View>
@@ -60,11 +81,21 @@ const ContactsScreen = () => {
 const { colors, text, subText } = defaultStyles;
 
 const styles = StyleSheet.create({
+  callContainer: {
+    borderColor: colors.accent,
+    padding: 10,
+    borderRadius: 25,
+    borderWidth: 5,
+  },
+
   contact: {
     backgroundColor: colors.off_white,
     padding: 20,
     borderRadius: "20%",
     marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   container: {
     flex: 1,

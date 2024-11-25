@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Touchable } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -12,11 +12,17 @@ const Navigation = () => {
 
   return (
     <View style={styles.container}>
-      <MaterialCommunityIcons
-        name="apps"
-        size={70}
-        color={defaultStyles.colors.primary}
-      />
+      <TouchableWithoutFeedback
+        onPress={() =>
+          navigation.reset({ index: 0, routes: [{ name: "Analytics" }] })
+        }
+      >
+        <MaterialCommunityIcons
+          name="apps"
+          size={70}
+          color={defaultStyles.colors.primary}
+        />
+      </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback
         onPress={() =>
