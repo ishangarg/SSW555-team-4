@@ -8,7 +8,9 @@ from flask_cors import CORS
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
-from chatgpt.ai import AI
+from chatgpt.ai import chatgpt
+from chatgpt.gemini_API import transcribe_and_get_mood 
+import json
 
 app = Flask(__name__)
 
@@ -20,7 +22,7 @@ CORS(app, resources={r"/*": {
 
 # connecting to mongoDB
 client = MongoClient("mongodb://localhost:27017/")
-ai = AI(key='')
+# ai = AI(key='')
 
 # database and collection names:
 db = client.sprinters
@@ -165,19 +167,23 @@ def transcribe_audio_route():
     audio_file = request.files['audio']
     input_path = os.path.join("/tmp", audio_file.filename)
     audio_file.save(input_path)
+
+
     
     # Convert audio to wav if necessary
-    wav_file = convert_audio_to_wav(input_path)
+    # wav_file = convert_audio_to_wav(input_path)
+
+    transcription_mood = transcribe_and_get_mood(input_path)
+    print(transcription_mood)
+    answer = chatgpt(transcription_mood['transcript'])
     
     # Transcribe the audio
-    transcription = transcribe_audio(wav_file)
+    # transcription = transcribe_audio(wav_file)
     
     # Clean up the temporary file
     os.remove(input_path)
-    if wav_file != input_path:
-        os.remove(wav_file)
     
-    return jsonify({"transcription": transcription}), 200
+    return jsonify({"transcription": transcription_mood['transcript'], 'mood': transcription_mood['emotion'], 'score': transcription_mood['sentiment_score'], 'answer': answer}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
